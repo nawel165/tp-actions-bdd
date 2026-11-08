@@ -32,7 +32,6 @@ def get_student(conn, name):
 
 
 """def average_grade(conn):
-    """Calculer la moyenne des notes."""
     raise NotImplementedError("La fonction average_grade n'est pas encore implementee")"""
 
 def average_grade(conn):
