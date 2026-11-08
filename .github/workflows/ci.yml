@@ -51,3 +51,24 @@ jobs:
       - name: Executer les tests
         run: npm test
         working-directory: node-app
+
+  java:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Preparer PostgreSQL
+        run: bash db/setup.sh
+
+      - name: Installer Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Executer les tests Java
+        run: mvn -B test
+        working-directory: java-app
