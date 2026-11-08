@@ -28,3 +28,26 @@ jobs:
       - name: Executer les tests
         run: pytest -v
         working-directory: python-app
+
+  node:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Preparer PostgreSQL
+        run: bash db/setup.sh
+
+      - name: Installer Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Installer les dependances
+        run: npm ci
+        working-directory: node-app
+
+      - name: Executer les tests
+        run: npm test
+        working-directory: node-app
