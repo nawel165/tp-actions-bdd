@@ -1,2 +1,5 @@
 node_modules/
 target/
+# PHP
+php-app/vendor/
+php-app/.phpunit.cache/

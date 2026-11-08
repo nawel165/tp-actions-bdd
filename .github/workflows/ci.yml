@@ -1,4 +1,3 @@
-
 name: CI Pipeline
 
 on:
@@ -72,3 +71,28 @@ jobs:
       - name: Executer les tests Java
         run: mvn -B test
         working-directory: java-app
+
+  php:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Recuperer le code
+        uses: actions/checkout@v4
+
+      - name: Preparer PostgreSQL
+        run: bash db/setup.sh
+
+      - name: Installer PHP et Composer
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: pdo_pgsql
+          tools: composer:v2
+
+      - name: Installer les dependances PHP
+        run: composer install --no-interaction --prefer-dist
+        working-directory: php-app
+
+      - name: Executer les tests PHP
+        run: composer test
+        working-directory: php-app
